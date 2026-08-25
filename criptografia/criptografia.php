@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <title>Criptografia</title>
 </head>
-<body>
+<body class="w-100 shadow-lg rounded-4 p-4">
     <h1>Pesquisa sobre Criptográfia</h1>
     <h2>O que é criptografia</h2>
 
@@ -29,23 +31,19 @@ session_start();
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $Senha = $_POST['Senha'];
 
-        $_SESSION['testes'][] = $Senha;
+        $_SESSION['testes'] = $Senha;
     }   
          /*Session é um aray que guarda as senhas que eu digitei dentro desse aray. 
          O empty verifica se esse array está vazio (pode ser um string, int etc). Se estiver vazio
          significa que é empty. Ou seja, se o array não está vazio
         (já tem alguma senha armazenada), execute o código dentro */ 
-
-    if(!empty($_SESSION['testes'])){
-         foreach ($_SESSION['testes'] as $s) {
-            echo "<h1>Senha Digitada: $Senha</h1>";
-            echo  "<p> md5: ".md5($Senha)."</p>";
-            echo  "<p> sha1: ".sha1($Senha)."</p>";
-            echo  "<p> password_hash: ".password_hash($Senha, PASSWORD_BCRYPT)."</p>";
-         }
-    }
   
 ?>
+
+    <h1>Senha Digitada: <?= $Senha ?></h1>
+    <p> MD5: <?= md5($Senha) ?> </p>
+    <p> SHA1: <?= sha1($Senha) ?> </p>
+    <p> HASH: <?= password_hash($Senha, PASSWORD_DEFAULT) ?> </p>
 
 </body>
 </html>
